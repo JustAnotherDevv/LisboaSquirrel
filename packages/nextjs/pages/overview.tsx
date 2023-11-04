@@ -23,7 +23,7 @@ function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }
             />
           </div>
           <div className="">
-            <h3 className="text-lg font-medium text-primary-content">{organisation}</h3>
+            <h3 className="text-lg font-medium text-white">{organisation}</h3>
             <a className="text-white/50  mt-2 text-sm">Visit website</a>
           </div>
         </div>
