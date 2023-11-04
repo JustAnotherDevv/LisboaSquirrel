@@ -11,13 +11,17 @@ function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }
   });
 
   return (
-    <li className="bg-white shadow rounded p-4">
-      <h3 className="text-lg font-medium text-gray-800">{organisation}</h3>
-      <a className="text-blue-500 hover:text-blue-600 underline mt-2">Visit website</a>
-      <Link href={`/org/${organisationId}`}>
-        <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded mt-2">Open</button>
-      </Link>
-    </li>
+    <Link href={`/org/${organisationId}`}>
+      <li className="bg-purple-100/10 shadow rounded-xl p-4 flex flex-row">
+        <div className="w-20">
+          <img src={"https://www.talentlayer.org/_next/image?url=%2Ficon_light.png&w=96&q=75"} width={50} height={75} />
+        </div>
+        <div className="">
+          <h3 className="text-lg font-medium text-primary-content">{organisation}</h3>
+          <a className="text-white/50  mt-2 text-sm">Visit website</a>
+        </div>
+      </li>
+    </Link>
   );
 }
 
@@ -48,14 +52,14 @@ export default function UserOverview() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-800">Dashboard</h1>
-      <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Organisations</h2>
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
+      <h1 className="text-4xl font-bold text-accent">My Dashboard</h1>
+
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12">
         {organisations[0].map(organisation => (
           <OrganisationOverviewCard key={organisation} organisationId={organisation} />
         ))}
       </ul>
-      <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Alocations</h2>
+      <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Allocations</h2>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
         {organisations[1].map(organisation => (
           <OrganisationOverviewCard key={organisation} organisationId={organisation} />

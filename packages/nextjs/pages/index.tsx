@@ -21,7 +21,7 @@ const Home: NextPage = () => {
           <h2 className="text-4xl title ">Chip in, cash out!</h2>
 
           <h3 className="text-white/70 text-xl text-center mt-2">
-            Contribute your time to early-stage startups in exchange for future tokens. Become your own VC!
+            Contribute to early-stage startups you believe in exchange for future tokens. Become your own VC!
           </h3>
         </div>
 

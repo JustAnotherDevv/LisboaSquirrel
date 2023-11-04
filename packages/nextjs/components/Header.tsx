@@ -91,7 +91,7 @@ export const Header = () => {
             {/* <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" /> */}
           </div>
           <div className="flex flex-col">
-            <Image src="/logo-white.svg" alt="Chipper Logo" width={50} height={50} />
+            <Image src="/logo-pink.svg" alt="Chipper Logo" width={50} height={50} />
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
