@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { NextPage } from "next";
-import FirstChart from "~~/components/FirstChart";
 import { MetaHeader } from "~~/components/MetaHeader";
 
 const Home: NextPage = () => {
@@ -18,9 +17,17 @@ const Home: NextPage = () => {
           CHIPPER
         </h1>
 
+        <div className="mt-20 flex flex-col items-center justify-center w-[500px]">
+          <h2 className="text-4xl title ">Chip in, cash out!</h2>
+
+          <h3 className="text-white/70 text-xl text-center mt-2">
+            Contribute your time to early-stage startups in exchange for future tokens. Become your own VC!
+          </h3>
+        </div>
+
         <div className="flex space-x-4 justify-center items-center mt-20">
           <Link
-            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-[#DF00FF] hover:bg-[#9900B4] text-white font-bold py-2 px-4 rounded"
             href="/create-organisation"
           >
             Create an Organisation
@@ -29,7 +36,7 @@ const Home: NextPage = () => {
             Go to Overview
           </Link>
         </div>
-      </div >
+      </div>
     </>
   );
 };
