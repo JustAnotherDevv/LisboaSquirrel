@@ -22,9 +22,14 @@ export default function CreateOrganisation() {
   // render the form and the status
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-800">Create Organisation</h1>
-      <div className="flex flex-col mb-4">
-        <label htmlFor="name" className="text-lg font-medium text-gray-700">
+      <h1 className="text-3xl font-bold text-primary-content">Start using Chipper</h1>
+
+      <h3 className="text-primary-content mt-4">Want to accelerate the development of your new idea? Let's go!</h3>
+
+      <br />
+
+      <div className="flex flex-col mt-5">
+        <label htmlFor="name" className="text-lg font-medium text-accent">
           Name
         </label>
         <input
@@ -36,8 +41,8 @@ export default function CreateOrganisation() {
           required
         />
       </div>
-      <div className="flex flex-col mb-4">
-        <label htmlFor="website" className="text-lg font-medium text-gray-700">
+      <div className="flex flex-col mt-5">
+        <label htmlFor="website" className="text-lg font-medium text-accent">
           Website
         </label>
         <input
@@ -49,9 +54,10 @@ export default function CreateOrganisation() {
           required
         />
       </div>
+
       <button
         onClick={() => writeAsync()}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        className="mt-5 bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         disabled={isLoading}
       >
         {isLoading ? "Creating..." : "Create"}

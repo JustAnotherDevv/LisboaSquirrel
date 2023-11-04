@@ -17,11 +17,11 @@ const Home: NextPage = () => {
           CHIPPER
         </h1>
 
-        <div className="mt-20 flex flex-col items-center justify-center w-[500px]">
+        <div className="mt-20 flex flex-col items-center justify-center w-[450px]">
           <h2 className="text-4xl title ">Chip in, cash out!</h2>
 
-          <h3 className="text-white/70 text-xl text-center mt-2">
-            Contribute to early-stage startups you believe in exchange for future tokens. Become your own VC!
+          <h3 className=" text-xl text-center mt-2 opacity-60">
+            Contribute to early-stage startups in exchange for future tokens. Become your own VC!
           </h3>
         </div>
 
