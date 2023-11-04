@@ -8,20 +8,19 @@ import { DeployFunction } from "hardhat-deploy/types";
  * @param hre HardhatRuntimeEnvironment object.
  */
 const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
   await deploy("OrganizationSheet", {
     from: deployer,
-    args: [deployer],
+    args: [],
     log: true,
     autoMine: true,
   });
 
   await deploy("SquirrelToken", {
     from: deployer,
-    args: [deployer],
+    args: [],
     log: true,
     autoMine: true,
   });
