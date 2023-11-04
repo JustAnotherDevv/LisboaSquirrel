@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
 contract SquirrelToken is ERC20, ERC20Permit {
-    constructor() ERC20("SquirrelToken", "SQT") ERC20Permit("SquirrelToken") {
-        _mint(msg.sender, 1000000000_000_000_000_000_000_000);
-    }
+	constructor() ERC20("SquirrelToken", "SQT") ERC20Permit("SquirrelToken") {
+		_mint(msg.sender, 1000000000_000_000_000_000_000_000);
+	}
 }
