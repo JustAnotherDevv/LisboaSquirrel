@@ -61,8 +61,8 @@ export default function OrganisationDashboard() {
   );
 }
 
-function UserDashboard() {
-  return <div>User Dashboard</div>;
+function UserDashboard({ user }: { user: string }) {
+  return <div>{user} s Dashboard</div>;
 }
 
 function AdminDashboard({ orgId }: { orgId: bigint }) {
@@ -94,6 +94,8 @@ function AdminDashboard({ orgId }: { orgId: bigint }) {
     <div>
       <div>
         <p>{userCount?.toString()} Users</p>
+
+        {/* ENS MODULE, ens works but react code not yet */}
         {/* <select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
           {users?.map((user) => {
             return (
@@ -102,6 +104,7 @@ function AdminDashboard({ orgId }: { orgId: bigint }) {
           })}
         </select> */}
         <select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
+          <option value="select" >select</option>
           {users?.map((user: { success: string; status: string }) => {
             return (
               <option key={user.result} value={user.result}>
@@ -111,7 +114,7 @@ function AdminDashboard({ orgId }: { orgId: bigint }) {
           })}
         </select>
       </div>
-      <div>Admin Dashboard for {selectedUser}</div>
+      {selectedUser ? <UserDashboard user={selectedUser} /> : <p>select a user</p>}
     </div>
   );
 }

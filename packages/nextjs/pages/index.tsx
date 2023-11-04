@@ -19,8 +19,8 @@ const Home: NextPage = () => {
           >
             Create an Organisation
           </Link>
-          <Link className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" href="/dashboard">
-            Go to Dashboard
+          <Link className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" href="/overview">
+            Go to Overview
           </Link>
         </div>
       </div >
