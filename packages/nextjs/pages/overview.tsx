@@ -12,13 +12,19 @@ function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }
 
   return (
     <Link href={`/org/${organisationId}`}>
-      <li className="bg-purple-100/10 shadow rounded-xl p-4 flex flex-row">
-        <div className="w-20">
-          <img src={"https://www.talentlayer.org/_next/image?url=%2Ficon_light.png&w=96&q=75"} width={50} height={75} />
-        </div>
-        <div className="">
-          <h3 className="text-lg font-medium text-primary-content">{organisation}</h3>
-          <a className="text-white/50  mt-2 text-sm">Visit website</a>
+      <li className="bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl p-[1px] shadow">
+        <div className="bg-slate-900/90 hover:bg-slate-900/80  rounded-xl p-4 flex flex-row  items-center">
+          <div className="w-20">
+            <img
+              src={"https://www.talentlayer.org/_next/image?url=%2Ficon_light.png&w=96&q=75"}
+              width={50}
+              height={75}
+            />
+          </div>
+          <div className="">
+            <h3 className="text-lg font-medium text-primary-content">{organisation}</h3>
+            <a className="text-white/50  mt-2 text-sm">Visit website</a>
+          </div>
         </div>
       </li>
     </Link>
@@ -59,7 +65,7 @@ export default function UserOverview() {
           <OrganisationOverviewCard key={organisation} organisationId={organisation} />
         ))}
       </ul>
-      <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Allocations</h2>
+      <h2 className="text-2xl font-semibold text-gray-700 mt-20">Your Allocations</h2>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
         {organisations[1].map(organisation => (
           <OrganisationOverviewCard key={organisation} organisationId={organisation} />
