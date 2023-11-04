@@ -78,11 +78,11 @@ contract OrganizationSheet {
 
 		for (uint256 i = 0; i < organizationAmount; i++) {
 			if (isAddressInArray(_address, organizations[i].admins)) {
-				adminOrgs[adminCount];
+				adminOrgs[adminCount] = i;
 				adminCount++;
 			}
 			if (isAddressInArray(_address, organizations[i].users)) {
-				userOrgs[userCount];
+				userOrgs[userCount] = i;
 				userCount++;
 			}
 		}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
-function OrganisationDashboardCard({ organisationId }: { organisationId: bigint }) {
+function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }) {
   const { data: organisation } = useScaffoldContractRead({
     contractName: "OrganizationSheet",
     functionName: "organizations",
@@ -21,7 +21,7 @@ function OrganisationDashboardCard({ organisationId }: { organisationId: bigint 
   );
 }
 
-export default function Dashboard() {
+export default function UserOverview() {
   const { address } = useAccount();
 
   const { data: organisations, isFetched } = useScaffoldContractRead({
@@ -29,7 +29,6 @@ export default function Dashboard() {
     functionName: "getOrganizations",
     args: [address],
   });
-  console.log(organisations, "AAA");
 
   if (!address) {
     return (
@@ -43,19 +42,23 @@ export default function Dashboard() {
     return <div>fetching</div>;
   }
 
+  if (!organisations) {
+    return <div>you are not an cofounder or a contributor in any organisation</div>;
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-gray-800">Dashboard</h1>
       <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Organisations</h2>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
         {organisations[0].map(organisation => (
-          <OrganisationDashboardCard key={organisation} organisationId={organisation} />
+          <OrganisationOverviewCard key={organisation} organisationId={organisation} />
         ))}
       </ul>
       <h2 className="text-2xl font-semibold text-gray-700 mt-4">Your Alocations</h2>
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
         {organisations[1].map(organisation => (
-          <OrganisationDashboardCard key={organisation} organisationId={organisation} />
+          <OrganisationOverviewCard key={organisation} organisationId={organisation} />
         ))}
       </ul>
     </div>
