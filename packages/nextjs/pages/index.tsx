@@ -9,12 +9,18 @@ const Home: NextPage = () => {
     <>
       <MetaHeader />
 
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <Image src="/logo.svg" alt="Logo" width={200} height={200} />
+      <div className="flex flex-col items-center justify-center py-2 mt-[100px]">
+        <div>
+          <Image src="/logo-pink.svg" alt="Logo" width={200} height={200} />
+        </div>
 
-        <div className="flex space-x-4 justify-center items-center h-screen">
+        <h1 className={` text-4xl text-transparent bg-clip-text bg-gradient-to-t from-purple-500 to-pink-600`}>
+          CHIPPER
+        </h1>
+
+        <div className="flex space-x-4 justify-center items-center mt-20">
           <Link
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
             href="/create-organisation"
           >
             Create an Organisation
