@@ -15,7 +15,7 @@ export default function CreateOrganisation() {
     // The callback function to execute when the transaction is confirmed.
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
-      router.push("/overview");
+      router.push("/setup-organisation");
     },
   });
 
