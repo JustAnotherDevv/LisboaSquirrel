@@ -80,7 +80,7 @@ contract OrganizationSheet {
         // ToDo organization edited event emit
     }
 
-    function getCriteriaAmount(uint256 organization) public view returns (uint256) {
+    function getNumberOfCriteria(uint256 organization) public view returns (uint256) {
         return organizations[organization].approvedCriteria.length;
     }
 
@@ -145,7 +145,7 @@ contract OrganizationSheet {
         Organization storage org = organizations[organizationAmount];
         require(org.votingPeriods[votePeriodIndex].isActive, "Allocation period has to be active.");
         require(org.approvedCriteria[votePeriodIndex].range >= rating, "Rating cannot be higher than range for given criteria.");
-        require(criteriaIndex < getCriteriaAmount(organization), "Allocation period has to be active.");
+        require(criteriaIndex < getNumberOfCriteria(organization), "Allocation period has to be active.");
         
         adminVotes[organization][votePeriodIndex][msg.sender][criteriaIndex] = voteCriteria({
         name: note,
@@ -166,11 +166,11 @@ contract OrganizationSheet {
     }
     
     //      ------      ROLE FUNCTIONS      ------     //
-    function getAdminAmount(uint256 organization) public view returns (uint256) {
+    function getNumberOfAdmins(uint256 organization) public view returns (uint256) {
         return organizations[organization].admins.length;
     }
 
-    function getUserAmount(uint256 organization) public view returns (uint256) {
+    function getNumberOfUsers(uint256 organization) public view returns (uint256) {
         return organizations[organization].users.length;
     }
 
