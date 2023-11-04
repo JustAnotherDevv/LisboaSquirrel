@@ -14,8 +14,8 @@ type MetaHeaderProps = {
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/` : "/";
 
 export const MetaHeader = ({
-  title = "Squirrel App",
-  description = "Gather your nuts",
+  title = "Chipper",
+  description = "Chip in, cash out",
   image = "thumbnail.jpg",
   twitterCard = "summary_large_image",
   children,
