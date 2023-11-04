@@ -56,6 +56,51 @@ contract OrganizationSheet {
 
 	constructor() {}
 
+	//      ------      FRONTEND GETTERS      ------     //
+	function getOrganizations(
+		address _address
+	) public view returns (uint256[] memory, uint256[] memory) {
+		uint256 adminCount = 0;
+		uint256 userCount = 0;
+		for (uint256 i = 0; i < organizationAmount; i++) {
+			if (isAddressInArray(_address, organizations[i].admins)) {
+				adminCount++;
+			}
+			if (isAddressInArray(_address, organizations[i].users)) {
+				userCount++;
+			}
+		}
+
+		uint256[] memory adminOrgs = new uint256[](adminCount);
+		uint256[] memory userOrgs = new uint256[](userCount);
+		adminCount = 0;
+		userCount = 0;
+
+		for (uint256 i = 0; i < organizationAmount; i++) {
+			if (isAddressInArray(_address, organizations[i].admins)) {
+				adminOrgs[adminCount];
+				adminCount++;
+			}
+			if (isAddressInArray(_address, organizations[i].users)) {
+				userOrgs[userCount];
+				userCount++;
+			}
+		}
+		return (adminOrgs, userOrgs);
+	}
+
+	function isAddressInArray(
+		address _address,
+		address[] memory _array
+	) private pure returns (bool) {
+		for (uint256 i = 0; i < _array.length; i++) {
+			if (_array[i] == _address) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	//      ------      ORGANIZATION FUNCTIONS      ------     //
 
 	function createOrganization(string memory _name) public {

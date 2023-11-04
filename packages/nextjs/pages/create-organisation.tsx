@@ -1,7 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export default function CreateOrganisation() {
+  const router = useRouter();
   // create a state for the form inputs
   const [name, setName] = React.useState("");
   const [website, setWebsite] = React.useState("");
@@ -13,6 +15,7 @@ export default function CreateOrganisation() {
     // The callback function to execute when the transaction is confirmed.
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
+      router.push("/dashboard");
     },
   });
 
