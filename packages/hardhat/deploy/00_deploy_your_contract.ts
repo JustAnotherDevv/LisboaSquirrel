@@ -15,14 +15,14 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     from: deployer,
     args: [],
     log: true,
-    autoMine: true,
+    autoMine: false,
   });
 
   await deploy("SquirrelToken", {
     from: deployer,
     args: [],
     log: true,
-    autoMine: true,
+    autoMine: false,
   });
 
   // Get the deployed contract

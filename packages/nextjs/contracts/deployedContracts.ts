@@ -137,6 +137,26 @@ const deployedContracts = {
               name: "_name",
               type: "string",
             },
+            {
+              internalType: "string",
+              name: "_imgUrl",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_website",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_github",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "_tokenAmountEstimation",
+              type: "uint256",
+            },
           ],
           name: "createOrganization",
           outputs: [],
@@ -154,6 +174,26 @@ const deployedContracts = {
               internalType: "string",
               name: "_name",
               type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_imgUrl",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_website",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_github",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "_tokenAmountEstimation",
+              type: "uint256",
             },
           ],
           name: "editOrganization",
@@ -369,30 +409,6 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "address",
-              name: "_address",
-              type: "address",
-            },
-          ],
-          name: "getOrganizations",
-          outputs: [
-            {
-              internalType: "uint256[]",
-              name: "",
-              type: "uint256[]",
-            },
-            {
-              internalType: "uint256[]",
-              name: "",
-              type: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
               internalType: "uint256",
               name: "organization",
               type: "uint256",
@@ -534,6 +550,26 @@ const deployedContracts = {
               type: "string",
             },
             {
+              internalType: "string",
+              name: "imgUrl",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "website",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "github",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "tokenAmountEstimation",
+              type: "uint256",
+            },
+            {
               internalType: "uint256",
               name: "votePeriodAmount",
               type: "uint256",
@@ -639,6 +675,11 @@ const deployedContracts = {
               internalType: "uint256",
               name: "votePeriodIndex",
               type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "_votedOnUser",
+              type: "address",
             },
             {
               internalType: "uint256",
