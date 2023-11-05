@@ -288,7 +288,7 @@ contract OrganizationSheet {
 		uint256 organization,
 		uint256 votePeriodIndex,
 		address _votedOnUser,
-		uint256 criteriaIndex,
+		// uint256 criteriaIndex,
 		voteCriteria[] memory criterias
 		// string memory note,
 		// uint32 rating
@@ -303,10 +303,10 @@ contract OrganizationSheet {
 			org.votingPeriods[votePeriodIndex].isActive,
 			"Allocation period has to be active."
 		);
-		require(
-			criteriaIndex < getCriteriaAmount(organization),
-			"Allocation period has to be active."
-		);
+		// require(
+		// 	criteriaIndex < getCriteriaAmount(organization),
+		// 	"Allocation period has to be active."
+		// );
 
 		for(uint256 i = 0; i != criterias.length; i++) {
 			require(
@@ -314,7 +314,7 @@ contract OrganizationSheet {
 			"Rating cannot be higher than range for given criteria."
 		);
 			adminVotes[organization][votePeriodIndex][msg.sender][_votedOnUser][
-				criteriaIndex
+				i
 			] = criterias[i];
 		}
 	}
