@@ -134,6 +134,13 @@ contract OrganizationSheet {
 		newOrg.github = _github;
 		newOrg.tokenAmountEstimation = _tokenAmountEstimation;
 		registeredNames[_name] = true;
+
+		approveCriteria(organizationAmount, "Time", 4);
+		approveCriteria(organizationAmount, "Impact", 3);
+		approveCriteria(organizationAmount, "Reliability", 3);
+		approveCriteria(organizationAmount, "Team", 15);
+		approveCriteria(organizationAmount, "Cofounder", 15);
+
 		organizationAmount++;
 
 		emit OrganizationCreated(msg.sender, organizationAmount, _name);
@@ -209,8 +216,11 @@ contract OrganizationSheet {
 			organizations[organization].admins.length != 0,
 			"No organization with this id."
 		);
-		Organization storage org = organizations[organizationAmount];
-		org.approvedCriteria.push(voteCriteria(_name, _range));
+		Organization storage org = organizations[organization];
+		// org.approvedCriteria.push(_name, _range);
+		voteCriteria memory newCriteria = voteCriteria(_name, _range);
+        org.approvedCriteria.push(newCriteria);
+		// org.users.push(user);
 		org.criteriaNames[_name] = true;
 		// ToDo criteria approved event emit
 	}
@@ -223,7 +233,7 @@ contract OrganizationSheet {
 			organizations[organization].admins.length != 0,
 			"No organization with this id."
 		);
-		Organization storage org = organizations[organizationAmount];
+		Organization storage org = organizations[organization];
 		uint256 criteriaId = getCriteriaIdInOrganization(organization, name);
 		org.approvedCriteria[criteriaId] = org.approvedCriteria[
 			org.users.length - 1
@@ -256,7 +266,8 @@ contract OrganizationSheet {
 	// }
 
 	function startAllocationPeriod(
-		uint256 organization
+		uint256 organization,
+		uint256 timestamp
 	) public onlySuperAdmin(organization) {
 		require(
 			organizations[organization].admins.length != 0,
@@ -269,7 +280,7 @@ contract OrganizationSheet {
 				"Can't add new voting period before finishing the previous one."
 			);
 		}
-		org.votingPeriods.push(votePeriod(true, block.timestamp, 0));
+		org.votingPeriods.push(votePeriod(true, timestamp, 0));
 		org.votePeriodAmount++;
 	}
 
@@ -307,7 +318,8 @@ contract OrganizationSheet {
 
 	function endAllocationPeriod(
 		uint256 organization,
-		uint256 index
+		uint256 index,
+		uint256 timestamp
 	) public onlySuperAdmin(organization) {
 		require(
 			organizations[organization].admins.length != 0,
@@ -329,7 +341,7 @@ contract OrganizationSheet {
 			}
 		}
 		org.votingPeriods[index].isActive = false;
-		org.votingPeriods[index].endDate = block.timestamp;
+		org.votingPeriods[index].endDate = timestamp;
 	}
 
 	//      ------      ROLE FUNCTIONS      ------     //
