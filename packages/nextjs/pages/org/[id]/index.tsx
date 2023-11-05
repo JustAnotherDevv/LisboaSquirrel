@@ -7,6 +7,13 @@ import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
+const mockCriteria = [
+  { id: 1, name: "Time", max: 4 },
+  { id: 2, name: "Impact", max: 10 },
+  { id: 3, name: "Reliability", max: 3 },
+  { id: 4, name: "Team", max: 15 },
+];
+
 export default function OrganisationDashboard() {
   const { address } = useAccount();
   const router = useRouter();
@@ -164,9 +171,15 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="flex-1 scroll-x flex flex-row">
           {admins?.map((admin: { result: string; status: string }, i) => {
             return (
-              <div className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-3"}>
+              <div className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5"}>
                 <p key={admin.result} className="text-sm">
                   {admin.result}
+
+                  <div className="flex flex-row mt-3">
+                    {mockCriteria.map(c => {
+                      return <div className="w-20 text-sm text-center">{c.name}</div>;
+                    })}
+                  </div>
                 </p>
               </div>
             );
@@ -178,7 +191,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="w-[400px]">
           {users?.map((user: { result: string; status: string }) => {
             return (
-              <div className="h-5">
+              <div className="h-10 border-b-2 border-b-white/20">
                 <p className="text-sm" key={user.result}>
                   {user.result}
                 </p>
@@ -187,7 +200,9 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
           })}
         </div>
 
-        <div className="flex-1 scroll-x flex flex-row">asds</div>
+        <div className="flex-1 scroll-x flex flex-row">
+          <input type="number" className="w-20 h-10 rounded-md text-center bg-transparent border-red-100 border-2" />
+        </div>
       </div>
     </div>
   );

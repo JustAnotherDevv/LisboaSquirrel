@@ -63,13 +63,15 @@ export default function UserOverview() {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-accent">My Dashboard</h1>
 
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12">
+        <h2 className="text-sm font-semibold text-primary-content mt-8 opacity-70">MY ORGANISATIONS</h2>
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
           {organisations[0].map(organisation => (
             <OrganisationOverviewCard key={organisation} organisationId={organisation} />
           ))}
         </ul>
-        <h2 className="text-2xl font-semibold text-gray-700 mt-20">Your Allocations</h2>
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-2">
+        <br />
+        <h2 className="text-sm font-semibold text-primary-content mt-8 opacity-70">I CONTRIBUTE TO</h2>
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
           {organisations[1].map(organisation => (
             <OrganisationOverviewCard key={organisation} organisationId={organisation} />
           ))}
