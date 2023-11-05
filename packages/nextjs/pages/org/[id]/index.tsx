@@ -164,14 +164,21 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
     { id: 4, name: "Team", max: 15 },
   ]);
   const [inputValues, setInputValues] = useState([]);
-
-  const handleVoteInputChange = (event, index) => {
+  const [lastUserToSave, setLastUserToSave] = useState("");
+  const handleVoteInputChange = (event, index, userAddy) => {
+    console.log(event, index, userAddy, "debugging here");
+    setLastUserToSave(userAddy);
     const { name, value } = event.target;
-    const list = [...inputValues];
+    let list = [...inputValues];
+    console.log(list, "list");
+    if (!list[index]) {
+      list[index] = {};
+    }
     list[index][name] = value;
     setInputValues(list);
   };
-  const args = [];
+
+  const args = [orgId, 0, lastUserToSave, inputValues];
 
   const { writeAsync: writeVotesToChain } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
@@ -276,8 +283,8 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
                         type="number"
                         max={c.max}
                         name="value"
-                        value={inputValues[index]?.value || ""}
-                        onChange={event => handleVoteInputChange(event, index)}
+                        value={inputValues[index]?.value || 0}
+                        onChange={event => handleVoteInputChange(event, index, user.result)}
                         className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
                       />
                     </>
