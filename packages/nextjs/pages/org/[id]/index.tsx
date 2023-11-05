@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useAccount, useContractReads, useEnsAddress } from "wagmi";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
@@ -9,6 +10,7 @@ import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 export default function OrganisationDashboard() {
   const { address } = useAccount();
   const router = useRouter();
+  const { period } = router.query;
 
   const { data: orgInfo } = useScaffoldContractRead({
     contractName: "OrganizationSheet",
@@ -145,10 +147,15 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
       <h3 className="text-primary-content mt-4 opacity-60">Time to score your {userCount?.toString()} team members!</h3>
 
       <div className="mt-10 w-full flex flex-row justify-start items-start">
-        <div className="w-[400px]">
-          {/* use this hook -> useEnsAddress */}
+        <div className="w-[400px] flex flex-row items-center ">
+          <div className="p-3 cursor-pointer">
+            <ChevronLeftIcon width={20} height={20} />
+          </div>
 
           <p className="text-primary-content text-2xl">November 2023</p>
+          <div className="p-3 cursor-pointer">
+            <ChevronRightIcon width={20} height={20} />
+          </div>
         </div>
 
         <div className="flex-1 scroll-x flex flex-row">
