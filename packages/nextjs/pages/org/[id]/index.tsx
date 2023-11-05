@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useAccount, useContractReads, useEnsAddress, useEnsName } from "wagmi";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import FirstChart from "~~/components/FirstChart";
 import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
@@ -51,7 +52,13 @@ export default function OrganisationDashboard() {
 }
 
 function UserDashboard({ user }: { user: string }) {
-  return <div>{user} s Dashboard</div>;
+  return (
+    <div>
+      <h1 className="text-3xl">My Contributions</h1>
+      <br />
+      <FirstChart width="100%" height={400} />
+    </div>
+  );
 }
 
 function UserToEnsName(props) {
@@ -208,7 +215,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
                           onChange={e => {
                             c.value = e.target.value;
                           }}
-                          className="w-20 text-sm text-center"
+                          className="w-1/4 text-sm text-center font-bold"
                         >
                           {c.name}
                         </div>
