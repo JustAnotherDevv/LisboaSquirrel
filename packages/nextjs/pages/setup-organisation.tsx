@@ -4,6 +4,8 @@ import { MetaHeader } from "~~/components/MetaHeader";
 
 export default function SetupOrganisation() {
   const router = useRouter();
+  const { org } = router.query;
+
   const [rows, setRows] = useState([
     { criteria: "Time", max: 3 },
     { criteria: "Impact", max: 10 },

@@ -110,7 +110,7 @@ export default function CreateOrganisation() {
 
         <div className="flex flex-col mt-5">
           <label htmlFor="totalTokenAlocation" className="text-lg font-medium text-accent">
-            Total Team Allocation (tokens)
+            Total amount of tokens to be allocated to the team
           </label>
           <input
             id="totalTokenAlocation"
