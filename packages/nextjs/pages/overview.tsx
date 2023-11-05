@@ -17,13 +17,13 @@ function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }
     return (
       <Link href={`/org/${organisationId}`}>
         <li className="bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl p-[1px] shadow">
-          <div className="bg-slate-900/90 hover:bg-slate-900/80  rounded-xl p-4 flex flex-row  items-center">
+          <div className="bg-slate-900/90 hover:bg-slate-900/80 rounded-xl p-4 px-5 flex flex-row items-center justify-start">
             <div className="w-20">
               <img src={organisation[1]} width={50} height={75} />
             </div>
-            <div className="">
-              <h3 className="text-lg font-medium text-white">{organisation[0]}</h3>
-              <p className="text-sm text-white/60">{organisation[2]}</p>
+            <div className="flex-1">
+              <div className="text-lg font-medium text-white">{organisation[0]}</div>
+              <div className="text-sm text-white/60">{organisation[2]}</div>
             </div>
           </div>
         </li>

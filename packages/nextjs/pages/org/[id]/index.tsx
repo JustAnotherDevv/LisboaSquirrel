@@ -142,18 +142,21 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-primary-content">{orgInfo[0]}</h1>
-
-      <h3 className="text-primary-content mt-4 opacity-60">Time to score your {userCount?.toString()} team members!</h3>
+      <div className="flex flex-cols justify-center items-center">
+        <img src={orgInfo[1]} width={50} height={75} />
+        <div className="flex-1 ml-4">
+          <h1 className="text-3xl font-bold text-primary-content">{orgInfo[0]}</h1>
+        </div>
+      </div>
 
       <div className="mt-10 w-full flex flex-row justify-start items-start">
         <div className="w-[400px] flex flex-row items-center ">
-          <div className="p-3 cursor-pointer">
+          <div className="pr-3 cursor-pointer">
             <ChevronLeftIcon width={20} height={20} />
           </div>
 
           <p className="text-primary-content text-2xl">November 2023</p>
-          <div className="p-3 cursor-pointer">
+          <div className="pl-3 cursor-pointer">
             <ChevronRightIcon width={20} height={20} />
           </div>
         </div>
@@ -161,7 +164,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="flex-1 scroll-x flex flex-row">
           {admins?.map((admin: { result: string; status: string }, i) => {
             return (
-              <div className={i % 2 ? `bg-white/20` : `bg-white/10`}>
+              <div className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-3"}>
                 <p key={admin.result} className="text-sm">
                   {admin.result}
                 </p>
