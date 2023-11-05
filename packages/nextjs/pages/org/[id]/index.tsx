@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useAccount, useContractReads, useEnsAddress } from "wagmi";
+import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -38,26 +39,26 @@ export default function OrganisationDashboard() {
   }
 
   return (
-    <div className="bg-gray-100">
-      <div className="flex justify-between items-center bg-white p-4">
-        <h1 className="text-lg font-bold text-gray-800">Dashboard of {orgInfo[0]}</h1>
+    <>
+      <MetaHeader title="Edit Organisation" />
+      <div className="container mx-auto px-4 py-8">
+        {isAdmin ? <AdminDashboard orgId={router.query.id} orgInfo={orgInfo} /> : <UserDashboard />}
+        <div className="fixed bottom-0 right-0 p-4">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+            onClick={() => console.log("Settings modal opened")}
+          >
+            Settings
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            onClick={() => console.log("Other modal opened")}
+          >
+            Other
+          </button>
+        </div>
       </div>
-      {isAdmin ? <AdminDashboard orgId={router.query.id} /> : <UserDashboard />}
-      <div className="fixed bottom-0 right-0 p-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2"
-          onClick={() => console.log("Settings modal opened")}
-        >
-          Settings
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={() => console.log("Other modal opened")}
-        >
-          Other
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -65,7 +66,7 @@ function UserDashboard({ user }: { user: string }) {
   return <div>{user} s Dashboard</div>;
 }
 
-function AdminDashboard({ orgId }: { orgId: bigint }) {
+function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const { data: userCount } = useScaffoldContractRead({
     contractName: "OrganizationSheet",
@@ -92,39 +93,15 @@ function AdminDashboard({ orgId }: { orgId: bigint }) {
 
   return (
     <div>
-      <div>
-        <p>{userCount?.toString()} Users</p>
+      <h1 className="text-3xl font-bold text-primary-content">{orgInfo[0]}</h1>
 
-        {/* ENS MODULE, ens works but react code not yet */}
-        {/* <select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
-          {users?.map((user) => {
-            return (
-              <OptionComponent key={user.result} user={user.result} />
-            );
-          })}
-        </select> */}
-        <select value={selectedUser} onChange={e => setSelectedUser(e.target.value)}>
-          <option value="select" >select</option>
-          {users?.map((user: { success: string; status: string }) => {
-            return (
-              <option key={user.result} value={user.result}>
-                {user.result}
-              </option>
-            );
-          })}
-        </select>
+      <h3 className="text-primary-content mt-4 opacity-60">Time to score your {userCount?.toString()} team members!</h3>
+
+      <div className="mt-10">
+        {users?.map((user: { success: string; status: string }) => {
+          return <p key={user.result}>{user.result}</p>; // todo: needs to show ens!
+        })}
       </div>
-      {selectedUser ? <UserDashboard user={selectedUser} /> : <p>select a user</p>}
     </div>
   );
 }
-
-// function OptionComponent({ user }) {
-//   const { data: ensAddress } = useEnsAddress({ address: user });
-
-//   return (
-//     <option key={user} value={ensAddress}>
-//       {ensAddress}
-//     </option>
-//   );
-// }
