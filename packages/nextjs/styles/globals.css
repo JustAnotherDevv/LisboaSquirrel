@@ -4,7 +4,7 @@
 
 :root,
 [data-theme] {
-  background: linear-gradient(0deg, hsl(var(--b2)) 0%, hsl(var(--b1)) 100%);
+  background: linear-gradient(0deg, hsl(var(--b1)) 0%, hsl(var(--b2)) 100%);
 }
 
 body {
