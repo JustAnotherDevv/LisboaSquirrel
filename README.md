@@ -1,19 +1,16 @@
 # 🐿️🥜
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+## Dapp
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## Smart Contracts
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, and Typescript.
+- `OrganizationSheet.sol` - Implementation of tracking for team token allocation for multiple organizations with different users and criteria.
+    
+- `SquirrelToken.sol` - Example of ERC20 compatible contract that could be used in the actual token luanch by the cofounders after all token allocation periods were completed.
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+### Adresses of smart contracts deployed on chains
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/1171422a-0ce4-4203-bcd4-d2d1941d198b)
+- ToDo
 
 ## Requirements
 
