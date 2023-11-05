@@ -36,7 +36,11 @@ contract OrganizationSheet {
 	uint256 public organizationAmount;
 
 	//      ------      EVENTS      ------     //
-	event OrganizationCreated(address indexed admin, string name);
+	event OrganizationCreated(
+		address indexed admin,
+		uint256 indexed organization,
+		string name
+	);
 	event UserAdded(address indexed user, uint256 indexed organization);
 	event AdminAdded(address indexed admin, uint256 indexed organization);
 
@@ -132,7 +136,7 @@ contract OrganizationSheet {
 		registeredNames[_name] = true;
 		organizationAmount++;
 
-		emit OrganizationCreated(msg.sender, _name);
+		emit OrganizationCreated(msg.sender, organizationAmount, _name);
 	}
 
 	function editOrganization(

@@ -1,24 +1,37 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
-import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContractWrite, useScaffoldEventSubscriber } from "~~/hooks/scaffold-eth";
 
 export default function CreateOrganisation() {
+  // const { address } = useAccount();
   const router = useRouter();
   // create a state for the form inputs
   const [name, setName] = React.useState("");
-  const [imgUrl, setImgUrl] = React.useState("");
   const [website, setWebsite] = React.useState("");
+  const [imgUrl, setImgUrl] = React.useState("");
   const [github, setGithub] = React.useState("");
+  const [totalTokenAlocation, setTotalTokenAlocation] = React.useState("");
 
   const { writeAsync, isLoading, isError, error } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
     functionName: "createOrganization",
-    args: [name, imgUrl, website, github, 1000000],
+    args: [name, imgUrl, website, github, BigInt(totalTokenAlocation)],
     // The callback function to execute when the transaction is confirmed.
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
-      router.push("/setup-organisation");
+    },
+  });
+
+  useScaffoldEventSubscriber({
+    contractName: "OrganizationSheet",
+    eventName: "OrganizationCreated",
+    listener: logs => {
+      logs.map(log => {
+        console.log(log, "new log", log.args.admin, log.args.name);
+        router.push(`/setup-organisation?org=${log.args.organization.toString()}`);
+      });
     },
   });
 
@@ -66,7 +79,7 @@ export default function CreateOrganisation() {
         </div>
 
         <div className="flex flex-col mt-5">
-          <label htmlFor="github" className="text-lg font-medium text-accent">
+          <label htmlFor="website" className="text-lg font-medium text-accent">
             Website
           </label>
           <input
@@ -75,7 +88,7 @@ export default function CreateOrganisation() {
             placeholder="https://"
             value={website}
             onChange={e => setWebsite(e.target.value)}
-            className="input input-bordered border-none p-2 rounded mt-2"
+            className="border border-gray-300 p-2 rounded mt-2"
             required
           />
         </div>
@@ -85,12 +98,27 @@ export default function CreateOrganisation() {
             Github
           </label>
           <input
-            id="github"
+            id="website"
             type="url"
             placeholder="https://"
             value={github}
             onChange={e => setGithub(e.target.value)}
-            className="input input-bordered border-none p-2 rounded mt-2"
+            className="border border-gray-300 p-2 rounded mt-2"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col mt-5">
+          <label htmlFor="totalTokenAlocation" className="text-lg font-medium text-accent">
+            totalTokenAlocation
+          </label>
+          <input
+            id="totalTokenAlocation"
+            type="number"
+            placeholder="1000000"
+            value={totalTokenAlocation}
+            onChange={e => setTotalTokenAlocation(e.target.value)}
+            className="border border-gray-300 p-2 rounded mt-2"
             required
           />
         </div>

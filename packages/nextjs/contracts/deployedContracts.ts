@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     OrganizationSheet: {
-      address: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      address: "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
       abi: [
         {
           inputs: [],
@@ -41,6 +41,12 @@ const deployedContracts = {
               internalType: "address",
               name: "admin",
               type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "organization",
+              type: "uint256",
             },
             {
               indexed: false,
