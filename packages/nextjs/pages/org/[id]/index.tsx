@@ -52,20 +52,6 @@ export default function OrganisationDashboard() {
       <MetaHeader title="Edit Organisation" />
       <div className="container mx-auto px-4 py-8">
         {isAdmin ? <AdminDashboard orgId={router.query.id} orgInfo={orgInfo} /> : <UserDashboard />}
-        <div className="fixed bottom-0 right-0 p-4">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2"
-            onClick={() => console.log("Settings modal opened")}
-          >
-            Settings
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            onClick={() => console.log("Other modal opened")}
-          >
-            Other
-          </button>
-        </div>
       </div>
     </>
   );
@@ -191,17 +177,44 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="w-[400px]">
           {users?.map((user: { result: string; status: string }) => {
             return (
-              <div className="h-10 border-b-2 border-b-white/20">
-                <p className="text-sm" key={user.result}>
-                  {user.result}
-                </p>
+              <div className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm">
+                <div>{user.result}</div>
               </div>
             );
           })}
+
+          <div className="bg-white/5 p-3">
+            <div className="text-sm font-semibold text-primary-content  opacity-70">Add New User</div>
+            <div className="mt-3">
+              <input
+                type="text"
+                className="w-full h-8 rounded-md text-left bg-transparent focus:bg-white/10 border-slate-500 border-2"
+              />
+            </div>
+            <div>
+              <button className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full mt-3">
+                Add
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="flex-1 scroll-x flex flex-row">
-          <input type="number" className="w-20 h-10 rounded-md text-center bg-transparent border-red-100 border-2" />
+        <div className="flex-1 scroll-x flex flex-col">
+          {users?.map((user: { result: string; status: string }) => {
+            return (
+              <div className="flex flex-row h-[50px] items-center border-b-white/20  border-b-2">
+                {mockCriteria.map(c => {
+                  return (
+                    <input
+                      type="number"
+                      max={c.max}
+                      className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
