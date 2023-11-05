@@ -7,12 +7,14 @@ export default function CreateOrganisation() {
   const router = useRouter();
   // create a state for the form inputs
   const [name, setName] = React.useState("");
+  const [imgUrl, setImgUrl] = React.useState("");
   const [website, setWebsite] = React.useState("");
+  const [github, setGithub] = React.useState("");
 
   const { writeAsync, isLoading, isError, error } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
     functionName: "createOrganization",
-    args: [name],
+    args: [name, imgUrl, website, github],
     // The callback function to execute when the transaction is confirmed.
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
@@ -27,7 +29,9 @@ export default function CreateOrganisation() {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-primary-content">Start using Chipper</h1>
 
-        <h3 className="text-primary-content mt-4">Want to accelerate the development of your new idea? Let's go!</h3>
+        <h3 className="text-primary-content mt-4">
+          Want to accelerate the development of your new idea? Get started by telling us about your Organisation:
+        </h3>
 
         <br />
 
@@ -38,29 +42,62 @@ export default function CreateOrganisation() {
           <input
             id="name"
             type="text"
+            placeholder="Name of your awesome organisation"
             value={name}
             onChange={e => setName(e.target.value)}
-            className="border border-gray-300 p-2 rounded mt-2"
+            className="input input-bordered border-none p-2 rounded mt-2"
             required
           />
         </div>
+
         <div className="flex flex-col mt-5">
-          <label htmlFor="website" className="text-lg font-medium text-accent">
+          <label htmlFor="imgUrl" className="text-lg font-medium text-accent">
+            Logo URL
+          </label>
+          <input
+            id="imgUrl"
+            type="url"
+            placeholder="https://"
+            value={imgUrl}
+            onChange={e => setImgUrl(e.target.value)}
+            className="input input-bordered border-none p-2 rounded mt-2"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col mt-5">
+          <label htmlFor="github" className="text-lg font-medium text-accent">
             Website
           </label>
           <input
             id="website"
             type="url"
+            placeholder="https://"
             value={website}
             onChange={e => setWebsite(e.target.value)}
-            className="border border-gray-300 p-2 rounded mt-2"
+            className="input input-bordered border-none p-2 rounded mt-2"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col mt-5">
+          <label htmlFor="github" className="text-lg font-medium text-accent">
+            Github
+          </label>
+          <input
+            id="github"
+            type="url"
+            placeholder="https://"
+            value={github}
+            onChange={e => setGithub(e.target.value)}
+            className="input input-bordered border-none p-2 rounded mt-2"
             required
           />
         </div>
 
         <button
           onClick={() => writeAsync()}
-          className="mt-5 bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="mt-5 bg-accent hover:bg-accent-focus text-white font-bold py-2 px-4 rounded"
           disabled={isLoading}
         >
           {isLoading ? "Creating..." : "Create"}
