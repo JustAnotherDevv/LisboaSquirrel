@@ -18,6 +18,12 @@
 -    `OrganizationSheet.sol`         0x2F51DeA930a71BE9fab183566116b0a5967063ea
 -    `SquirrelToken.sol`            0xbb3a8a4ebc9bEf9f394d4bdf2D0ae1EAe794F23a
 
+
+### Integrations:
+
+## PHala
+
+[Phala offchain oracle running](./Capture111.PNG)
 ## Requirements
 
 Before you begin, you need to install the following tools:
