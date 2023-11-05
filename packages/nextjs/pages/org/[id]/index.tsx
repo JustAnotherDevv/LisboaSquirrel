@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useAccount, useContractReads, useEnsAddress } from "wagmi";
+import { useAccount, useContractReads, useEnsAddress, useEnsName } from "wagmi";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
-import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
-
-const mockCriteria = [
-  { id: 1, name: "Time", max: 4 },
-  { id: 2, name: "Impact", max: 10 },
-  { id: 3, name: "Reliability", max: 3 },
-  { id: 4, name: "Team", max: 15 },
-];
+import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export default function OrganisationDashboard() {
   const { address } = useAccount();
@@ -61,8 +54,27 @@ function UserDashboard({ user }: { user: string }) {
   return <div>{user} s Dashboard</div>;
 }
 
+function UserToEnsName(props) {
+  const { data, isError, isLoading, error } = useEnsName({
+    address: props.result,
+    chainId: 1,
+  });
+  console.log(props, data, "<<<<<<<<<", error || "");
+  if (isLoading) return <div>Fetching name…</div>;
+  if (isError) return <div>{props.result}</div>;
+  return <div>{data}</div>;
+}
+
 function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [newUserAddy, setNewUserAddy] = useState("");
+
+  const { writeAsync: writeNewUserAsync } = useScaffoldContractWrite({
+    contractName: "OrganizationSheet",
+    functionName: "addUserToOrganization",
+    args: [orgId, newUserAddy],
+  });
+
   const { data: userCount } = useScaffoldContractRead({
     contractName: "OrganizationSheet",
     functionName: "getUserAmount",
@@ -133,6 +145,32 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   const { data: criteria } = useContractReads({ contracts: criteriaCalls });
   console.log(criteria, "criteria are here");
 
+  const [mockCriteria, setMockCriteria] = useState([
+    { id: 1, name: "Time", max: 4 },
+    { id: 2, name: "Impact", max: 10 },
+    { id: 3, name: "Reliability", max: 3 },
+    { id: 4, name: "Team", max: 15 },
+  ]);
+  const [inputValues, setInputValues] = useState([]);
+
+  const handleVoteInputChange = (event, index) => {
+    const { name, value } = event.target;
+    const list = [...inputValues];
+    list[index][name] = value;
+    setInputValues(list);
+  };
+  const args = [orgId, votePeriodIndex, _votedOnUser, criteriaIndex, inputValues];
+
+  const { writeAsync: writeVotesToChain } = useScaffoldContractWrite({
+    contractName: "OrganizationSheet",
+    functionName: "voteAllocationPeriod",
+    args,
+  });
+
+  const handleVoteSubmit = () => {
+    writeVotesToChain();
+  };
+
   return (
     <div>
       <div className="flex flex-cols justify-center items-center">
@@ -163,7 +201,16 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
 
                   <div className="flex flex-row mt-3">
                     {mockCriteria.map(c => {
-                      return <div className="w-20 text-sm text-center">{c.name}</div>;
+                      return (
+                        <div
+                          onChange={e => {
+                            c.value = e.target.value;
+                          }}
+                          className="w-20 text-sm text-center"
+                        >
+                          {c.name}
+                        </div>
+                      );
                     })}
                   </div>
                 </p>
@@ -178,7 +225,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
           {users?.map((user: { result: string; status: string }) => {
             return (
               <div className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm">
-                <div>{user.result}</div>
+                <UserToEnsName result={user.result}></UserToEnsName>
               </div>
             );
           })}
@@ -188,11 +235,15 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
             <div className="mt-3">
               <input
                 type="text"
+                onChange={e => setNewUserAddy(e.target.value)}
                 className="w-full h-8 rounded-md text-left bg-transparent focus:bg-white/10 border-slate-500 border-2"
               />
             </div>
             <div>
-              <button className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full mt-3">
+              <button
+                onClick={() => writeNewUserAsync()}
+                className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full mt-3"
+              >
                 Add
               </button>
             </div>
@@ -203,15 +254,26 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
           {users?.map((user: { result: string; status: string }) => {
             return (
               <div className="flex flex-row h-[50px] items-center border-b-white/20  border-b-2">
-                {mockCriteria.map(c => {
+                {mockCriteria.map((c, index) => {
                   return (
-                    <input
-                      type="number"
-                      max={c.max}
-                      className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
-                    />
+                    <>
+                      <input
+                        type="number"
+                        max={c.max}
+                        name="value"
+                        value={inputValues[index]?.value || ""}
+                        onChange={event => handleVoteInputChange(event, index)}
+                        className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
+                      />
+                    </>
                   );
                 })}
+                <button
+                  onClick={handleVoteSubmit}
+                  className="w-20 h-8 text-center bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full  mx-2"
+                >
+                  Save
+                </button>
               </div>
             );
           })}
