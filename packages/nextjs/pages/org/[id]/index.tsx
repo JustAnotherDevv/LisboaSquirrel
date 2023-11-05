@@ -59,10 +59,10 @@ function UserToEnsName(props) {
     address: props.result,
     chainId: 1,
   });
-  console.log(props, data, "<<<<<<<<<", error || "");
+
   if (isLoading) return <div>Fetching name…</div>;
   if (isError) return <div>{props.result}</div>;
-  return <div>{data}</div>;
+  return <span>{data || props.result}</span>;
 }
 
 function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
@@ -159,7 +159,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
     list[index][name] = value;
     setInputValues(list);
   };
-  const args = [orgId, votePeriodIndex, _votedOnUser, criteriaIndex, inputValues];
+  const args = [];
 
   const { writeAsync: writeVotesToChain } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
@@ -197,7 +197,9 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
             return (
               <div className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5"}>
                 <p key={admin.result} className="text-sm">
-                  {admin.result}
+                  <div className="font-mono bg-slate-900 rounded-xl text-white py-1 px-3">
+                    <UserToEnsName result={admin.result} />
+                  </div>
 
                   <div className="flex flex-row mt-3">
                     {mockCriteria.map(c => {
@@ -224,33 +226,34 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="w-[400px]">
           {users?.map((user: { result: string; status: string }) => {
             return (
-              <div className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm">
-                <UserToEnsName result={user.result}></UserToEnsName>
+              <div className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm font-mono">
+                <UserToEnsName result={user.result} />
               </div>
             );
           })}
 
-          <div className="bg-white/5 p-3">
-            <div className="text-sm font-semibold text-primary-content  opacity-70">Add New User</div>
-            <div className="mt-3">
-              <input
-                type="text"
-                onChange={e => setNewUserAddy(e.target.value)}
-                className="w-full h-8 rounded-md text-left bg-transparent focus:bg-white/10 border-slate-500 border-2"
-              />
-            </div>
-            <div>
-              <button
-                onClick={() => writeNewUserAsync()}
-                className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full mt-3"
-              >
-                Add
-              </button>
+          <div className="bg-gradient-to-b from-white/10 to-white/0 p-3 rounded-b-lg">
+            <div className="text-sm font-semibold text-primary-content opacity-70">Add New User</div>
+            <div className="mt-3 w-full flex flex-row justify-start  items-start">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  onChange={e => setNewUserAddy(e.target.value)}
+                  className="h-8 rounded-md text-left bg-slate-500/10 focus:bg-slate-500/20 border-slate-500 border-2 px-2 font-mono w-full"
+                />
+              </div>
+              <div className="w-20 flex justify-end ">
+                <button
+                  onClick={() => writeNewUserAsync()}
+                  className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full"
+                >
+                  Add
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="flex-1 scroll-x flex flex-col">
+        <div className="flex-1 scroll-x flex flex-col ">
           {users?.map((user: { result: string; status: string }) => {
             return (
               <div className="flex flex-row h-[50px] items-center border-b-white/20  border-b-2">
