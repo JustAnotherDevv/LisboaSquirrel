@@ -30,7 +30,7 @@ export default function CreateOrganisation() {
     listener: logs => {
       logs.map(log => {
         console.log(log, "new log", log.args.admin, log.args.name);
-        router.push(`/setup-organisation?org=${log.args.organization.toString()}`);
+        //router.push(`/setup-organisation?org=${log.args.organization.toString()}`);
       });
     },
   });
