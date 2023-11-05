@@ -145,7 +145,11 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
       <h3 className="text-primary-content mt-4 opacity-60">Time to score your {userCount?.toString()} team members!</h3>
 
       <div className="mt-10 w-full flex flex-row justify-start items-start">
-        <div className="w-[400px]"></div>
+        <div className="w-[400px]">
+          {/* use this hook -> useEnsAddress */}
+
+          <p className="text-primary-content text-2xl">November 2023</p>
+        </div>
 
         <div className="flex-1 scroll-x flex flex-row">
           {admins?.map((admin: { result: string; status: string }, i) => {

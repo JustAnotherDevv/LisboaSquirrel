@@ -5,31 +5,31 @@ import { MetaHeader } from "~~/components/MetaHeader";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 function OrganisationOverviewCard({ organisationId }: { organisationId: bigint }) {
-  const { data: organisation } = useScaffoldContractRead({
+  const { data: organisation, isLoading } = useScaffoldContractRead({
     contractName: "OrganizationSheet",
     functionName: "organizations",
     args: [organisationId],
   });
 
-  return (
-    <Link href={`/org/${organisationId}`}>
-      <li className="bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl p-[1px] shadow">
-        <div className="bg-slate-900/90 hover:bg-slate-900/80  rounded-xl p-4 flex flex-row  items-center">
-          <div className="w-20">
-            <img
-              src={"https://www.talentlayer.org/_next/image?url=%2Ficon_light.png&w=96&q=75"}
-              width={50}
-              height={75}
-            />
+  if (!organisation) {
+    return <p>Loading...</p>;
+  } else {
+    return (
+      <Link href={`/org/${organisationId}`}>
+        <li className="bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl p-[1px] shadow">
+          <div className="bg-slate-900/90 hover:bg-slate-900/80  rounded-xl p-4 flex flex-row  items-center">
+            <div className="w-20">
+              <img src={organisation[1]} width={50} height={75} />
+            </div>
+            <div className="">
+              <h3 className="text-lg font-medium text-white">{organisation[0]}</h3>
+              <p className="text-sm text-white/60">{organisation[2]}</p>
+            </div>
           </div>
-          <div className="">
-            <h3 className="text-lg font-medium text-white">{organisation}</h3>
-            <a className="text-white/50  mt-2 text-sm">Visit website</a>
-          </div>
-        </div>
-      </li>
-    </Link>
-  );
+        </li>
+      </Link>
+    );
+  }
 }
 
 export default function UserOverview() {
