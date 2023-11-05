@@ -289,13 +289,14 @@ contract OrganizationSheet {
 		uint256 votePeriodIndex,
 		address _votedOnUser,
 		uint256 criteriaIndex,
-		string memory note,
-		uint32 rating
+		voteCriteria[] memory criterias
+		// string memory note,
+		// uint32 rating
 	) public onlySuperAdmin(organization) {
 		// ToDo - change it so that user can vote on all criterias in 1 tx
 		require(
 			organizations[organization].admins.length != 0,
-			"No organization with this id."
+			"No organization with this id exists."
 		);
 		Organization storage org = organizations[organizationAmount];
 		require(
@@ -303,18 +304,52 @@ contract OrganizationSheet {
 			"Allocation period has to be active."
 		);
 		require(
-			org.approvedCriteria[votePeriodIndex].range >= rating,
-			"Rating cannot be higher than range for given criteria."
-		);
-		require(
 			criteriaIndex < getCriteriaAmount(organization),
 			"Allocation period has to be active."
 		);
 
-		adminVotes[organization][votePeriodIndex][msg.sender][_votedOnUser][
-			criteriaIndex
-		] = voteCriteria({ name: note, range: rating });
+		for(uint256 i = 0; i != criterias.length; i++) {
+			require(
+			org.approvedCriteria[votePeriodIndex].range >= criterias[i].range,
+			"Rating cannot be higher than range for given criteria."
+		);
+			adminVotes[organization][votePeriodIndex][msg.sender][_votedOnUser][
+				criteriaIndex
+			] = criterias[i];
+		}
 	}
+
+	// function voteAllocationPeriod(
+	// 	uint256 organization,
+	// 	uint256 votePeriodIndex,
+	// 	address _votedOnUser,
+	// 	uint256 criteriaIndex,
+	// 	string memory note,
+	// 	uint32 rating
+	// ) public onlySuperAdmin(organization) {
+	// 	// ToDo - change it so that user can vote on all criterias in 1 tx
+	// 	require(
+	// 		organizations[organization].admins.length != 0,
+	// 		"No organization with this id."
+	// 	);
+	// 	Organization storage org = organizations[organizationAmount];
+	// 	require(
+	// 		org.votingPeriods[votePeriodIndex].isActive,
+	// 		"Allocation period has to be active."
+	// 	);
+	// 	require(
+	// 		org.approvedCriteria[votePeriodIndex].range >= rating,
+	// 		"Rating cannot be higher than range for given criteria."
+	// 	);
+	// 	require(
+	// 		criteriaIndex < getCriteriaAmount(organization),
+	// 		"Allocation period has to be active."
+	// 	);
+
+	// 	adminVotes[organization][votePeriodIndex][msg.sender][_votedOnUser][
+	// 		criteriaIndex
+	// 	] = voteCriteria({ name: note, range: rating });
+	// }
 
 	function endAllocationPeriod(
 		uint256 organization,

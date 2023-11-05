@@ -14,7 +14,7 @@ contract OracleConsumerContract is PhatRollupAnchor, Ownable {
     mapping(uint => string) requests;
     uint nextRequest = 1;
 
-    constructor(address phatAttestor) {
+    constructor(address phatAttestor) Ownable(msg.sender) {
         _grantRole(PhatRollupAnchor.ATTESTOR_ROLE, phatAttestor);
     }
 
