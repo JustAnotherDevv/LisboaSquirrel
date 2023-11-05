@@ -10,7 +10,13 @@
 
 ### Adresses of smart contracts deployed on chains
 
-- ToDo
+#### Polygon Mumbai Testnet:
+-     `OrganizationSheet.sol`    -    0x1732CfDEB84176C78190eaED7592D95726456A77
+-     `SquirrelToken.sol`    0xf492cC2A1e0ADB48B98c6D68118Ab7d79dc93b5d
+
+#### Gnosis Chiado Testnet:
+-    `OrganizationSheet.sol`         0x2F51DeA930a71BE9fab183566116b0a5967063ea
+-    `SquirrelToken.sol`            0xbb3a8a4ebc9bEf9f394d4bdf2D0ae1EAe794F23a
 
 ## Requirements
 
