@@ -30,7 +30,7 @@ const Home: NextPage = () => {
             className="bg-[#DF00FF] hover:bg-[#9900B4] text-white font-bold py-2 px-4 rounded"
             href="/create-organisation"
           >
-            Create an Organisation
+            Grow my Organisation!
           </Link>
           <Link className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" href="/overview">
             Go to Overview

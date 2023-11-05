@@ -65,16 +65,26 @@ export default function UserOverview() {
 
         <h2 className="text-sm font-semibold text-primary-content mt-8 opacity-70">MY ORGANISATIONS</h2>
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-          {organisations[0].map(organisation => (
-            <OrganisationOverviewCard key={organisation} organisationId={organisation} />
-          ))}
+          {organisations[0].length > 0 ? (
+            organisations[0].map(organisation => (
+              <OrganisationOverviewCard key={organisation} organisationId={organisation} />
+            ))
+          ) : (
+            <p>
+              You are not a founder of any organisation yet. <Link href="/create-organisation">Create one now!</Link>
+            </p>
+          )}
         </ul>
         <br />
         <h2 className="text-sm font-semibold text-primary-content mt-8 opacity-70">I CONTRIBUTE TO</h2>
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-          {organisations[1].map(organisation => (
-            <OrganisationOverviewCard key={organisation} organisationId={organisation} />
-          ))}
+          {organisations[1].length > 0 ? (
+            organisations[1].map(organisation => (
+              <OrganisationOverviewCard key={organisation} organisationId={organisation} />
+            ))
+          ) : (
+            <p>You don't contribute to any organisation yet.</p>
+          )}
         </ul>
       </div>
     </>
