@@ -11,7 +11,9 @@
     "lint": "eslint --config ./.eslintrc.json --ignore-path ./.eslintignore ./*.ts ./deploy/**/*.ts ./scripts/**/*.ts ./test/**/*.ts",
     "lint-staged": "eslint --config ./.eslintrc.json --ignore-path ./.eslintignore",
     "test": "REPORT_GAS=true hardhat test --network hardhat",
-    "verify": "hardhat etherscan-verify"
+    "verify": "hardhat etherscan-verify",
+    "build-function": "phat-fn build src/index.ts",
+    "run-function": "phat-fn run dist/index.js"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
@@ -43,12 +45,22 @@
     "solidity-coverage": "^0.8.2",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "@types/chai": "^4.2.0",
+    "@types/node": ">=12.0.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.0",
     "dotenv": "^16.0.3",
     "envfile": "^6.18.0",
-    "qrcode": "^1.5.1"
+    "qrcode": "^1.5.1",
+    "@phala/ethers": "^6.6.3",
+    "@phala/fn": "^0.1.13",
+    "@phala/pink-env": "^1.0.11",
+    "@phala/sdk": "^0.5.3-nightly-20231013",
+    "crypto-browserify": "^3.12.0",
+    "dedent": "^1.5.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1"
   }
 }
