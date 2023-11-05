@@ -88,7 +88,7 @@ export default function CreateOrganisation() {
             placeholder="https://"
             value={website}
             onChange={e => setWebsite(e.target.value)}
-            className="border border-gray-300 p-2 rounded mt-2"
+            className="input input-bordered border-none p-2 rounded mt-2"
             required
           />
         </div>
@@ -103,22 +103,22 @@ export default function CreateOrganisation() {
             placeholder="https://"
             value={github}
             onChange={e => setGithub(e.target.value)}
-            className="border border-gray-300 p-2 rounded mt-2"
+            className="input input-bordered border-none p-2 rounded mt-2"
             required
           />
         </div>
 
         <div className="flex flex-col mt-5">
           <label htmlFor="totalTokenAlocation" className="text-lg font-medium text-accent">
-            totalTokenAlocation
+            Total Team Allocation (tokens)
           </label>
           <input
             id="totalTokenAlocation"
             type="number"
             placeholder="1000000"
-            value={totalTokenAlocation}
+            value={totalTokenAlocation || 1000000}
             onChange={e => setTotalTokenAlocation(e.target.value)}
-            className="border border-gray-300 p-2 rounded mt-2"
+            className="input input-bordered border-none p-2 rounded mt-2"
             required
           />
         </div>
