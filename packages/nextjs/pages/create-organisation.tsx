@@ -70,4 +70,3 @@ export default function CreateOrganisation() {
     </>
   );
 }
-// import the useCreateOrganisation hook
