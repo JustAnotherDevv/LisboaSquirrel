@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { MetaHeader } from "~~/components/MetaHeader";
 
 export default function SetupOrganisation() {
   const router = useRouter();
@@ -54,34 +55,37 @@ function CriteriaRow({ index, criteria, max, onChange, isApplied }) {
   };
 
   return (
-    <div className="flex items-center space-x-4">
-      <div className="w-1/2">
-        <input
-          type="text"
-          className="w-full border-gray-300 rounded-md shadow-sm"
-          placeholder="Criteria name"
-          value={criteria}
-          onChange={e => onChange(index, "criteria", e.target.value)}
-          disabled={isDisabled}
-        />
+    <>
+      <MetaHeader title="Setup Organisation" />
+      <div className="flex items-center space-x-4">
+        <div className="w-1/2">
+          <input
+            type="text"
+            className="w-full border-gray-300 rounded-md shadow-sm"
+            placeholder="Criteria name"
+            value={criteria}
+            onChange={e => onChange(index, "criteria", e.target.value)}
+            disabled={isDisabled}
+          />
+        </div>
+        <div className="w-1/2">
+          <input
+            type="number"
+            className="w-full border-gray-300 rounded-md shadow-sm"
+            placeholder="Max value"
+            value={max}
+            onChange={e => onChange(index, "max", e.target.value)}
+            disabled={isDisabled}
+          />
+        </div>
+        <button
+          className={`px-4 py-2 rounded-md text-white ${isApplied ? "bg-green-500" : "bg-blue-500"}`}
+          onClick={handleApply}
+          disabled={isApplied}
+        >
+          {isApplied ? "Applied" : "Apply"}
+        </button>
       </div>
-      <div className="w-1/2">
-        <input
-          type="number"
-          className="w-full border-gray-300 rounded-md shadow-sm"
-          placeholder="Max value"
-          value={max}
-          onChange={e => onChange(index, "max", e.target.value)}
-          disabled={isDisabled}
-        />
-      </div>
-      <button
-        className={`px-4 py-2 rounded-md text-white ${isApplied ? "bg-green-500" : "bg-blue-500"}`}
-        onClick={handleApply}
-        disabled={isApplied}
-      >
-        {isApplied ? "Applied" : "Apply"}
-      </button>
-    </div>
+    </>
   );
 }

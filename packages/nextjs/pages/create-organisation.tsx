@@ -14,7 +14,7 @@ export default function CreateOrganisation() {
   const { writeAsync, isLoading, isError, error } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
     functionName: "createOrganization",
-    args: [name, imgUrl, website, github],
+    args: [name, imgUrl, website, github, 1000000],
     // The callback function to execute when the transaction is confirmed.
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
@@ -29,7 +29,7 @@ export default function CreateOrganisation() {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-primary-content">Start using Chipper</h1>
 
-        <h3 className="text-primary-content mt-4">
+        <h3 className="text-primary-content mt-4 opacity-60">
           Want to accelerate the development of your new idea? Get started by telling us about your Organisation:
         </h3>
 

@@ -13,9 +13,9 @@ const Home: NextPage = () => {
           <Image src="/logo-pink.svg" alt="Logo" width={200} height={200} />
         </div>
 
-        <h1 className={` text-4xl text-transparent bg-clip-text bg-gradient-to-t from-purple-500 to-pink-600`}>
-          CHIPPER
-        </h1>
+        <div>
+          <Image src="/logo-text.svg" alt="Chipper" width={200} height={200} />
+        </div>
 
         <div className="mt-20 flex flex-col items-center justify-center w-[450px]">
           <h2 className="text-4xl title ">Chip in, cash out!</h2>

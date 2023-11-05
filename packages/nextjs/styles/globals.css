@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap");
+
 :root,
 [data-theme] {
   background: linear-gradient(0deg, hsl(var(--b1)) 0%, hsl(var(--b2)) 100%);
@@ -17,6 +19,10 @@ h3,
 h4 {
   margin-bottom: 0.5rem;
   line-height: 1;
+}
+
+h1 {
+  font-family: "Kanit", sans-serif;
 }
 
 p {
