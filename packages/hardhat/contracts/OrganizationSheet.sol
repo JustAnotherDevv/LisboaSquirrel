@@ -82,6 +82,18 @@ contract OrganizationSheet {
 		return (adminOrgs, userOrgs);
 	}
 
+	function isAddressInArray(
+		address _address,
+		address[] memory _array
+	) private pure returns (bool) {
+		for (uint256 i = 0; i < _array.length; i++) {
+			if (_array[i] == _address) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	modifier onlyAdminOrUser(uint256 organization) {
 		require(
 			isUserInOrganization(organization, msg.sender) ||
