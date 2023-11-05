@@ -56,6 +56,11 @@ function UserDashboard({ user }: { user: string }) {
     <div>
       <h1 className="text-3xl">My Contributions</h1>
       <br />
+      <p>
+        We ran out of time :( This screen will show tokens allocated to you from various projects over time, plus a cool
+        chart.
+      </p>
+      <br />
       <FirstChart width="100%" height={400} />
     </div>
   );
