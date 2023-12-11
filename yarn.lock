@@ -9465,6 +9465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fetch-jsonp@npm:1.2.3":
+  version: 1.2.3
+  resolution: "fetch-jsonp@npm:1.2.3"
+  checksum: a00f1afd6dfd847f1555e73a85cc456f3205177d0781570985921b23f03345705874e26a33100bd8e22eddb86e4904b71bad37a1f9183a73929e9f905d96598e
+  languageName: node
+  linkType: hard
+
 "figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
@@ -14730,6 +14737,7 @@ __metadata:
     husky: ^8.0.1
     lint-staged: ^13.0.3
     openzeppelin-contracts: ^4.0.0
+    use-mailchimp-form: ^3.1.0
   languageName: unknown
   linkType: soft
 
@@ -16480,6 +16488,18 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 0f8b9e571f68a4694033ec00690bf73d781ac890140ae9ed4b330f71f7adb3f7d7df5cdaa32923c4d03fdc9de8a11be0f84301175ae4f66208af52ad03c55504
+  languageName: node
+  linkType: hard
+
+"use-mailchimp-form@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "use-mailchimp-form@npm:3.1.0"
+  dependencies:
+    fetch-jsonp: 1.2.3
+    query-string: 7.1.3
+  peerDependencies:
+    react: ">= 16.8.0"
+  checksum: a196715f108b3f974e8869d8599fae7f6a647f61a91ec909d2d1c75d70d1c7d7a05a491c8d14ae6d1c624da0f7a45a685ac899ad6480219978cb7df6346b6fe9
   languageName: node
   linkType: hard
 

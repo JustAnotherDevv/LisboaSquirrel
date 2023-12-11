@@ -187,7 +187,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   });
 
   const handleVoteSubmit = () => {
-    writeVotesToChain();
+    alert("We ran out of time to hook up the UI, but the contract works!");
   };
 
   return (
@@ -283,8 +283,6 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
                         type="number"
                         max={c.max}
                         name="value"
-                        value={inputValues[index]?.value || 0}
-                        onChange={event => handleVoteInputChange(event, index, user.result)}
                         className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
                       />
                     </>
