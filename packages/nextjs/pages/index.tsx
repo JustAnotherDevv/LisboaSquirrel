@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
         <h1 className="text-4xl text-black">CHIPPER</h1>
 
-        <div className="mt-[90px] flex flex-col items-center justify-center w-[500px]">
+        <div className="mt-[90px] flex flex-col items-center justify-center w-[520px]">
           <h2 className="text-4xl">Bootstrap new ideas with friends</h2>
 
           <h3 className="text-xl text-center mt-2 opacity-60">
