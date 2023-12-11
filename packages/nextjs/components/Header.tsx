@@ -92,7 +92,7 @@ export const Header = () => {
         </div>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex flex-col">
-            <Image src="/logo-pink.svg" alt="Chipper Logo" width={50} height={50} />
+            <Image src="/logo.svg" alt="Chipper Logo" width={50} height={50} />
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
