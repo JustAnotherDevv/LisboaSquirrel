@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useAccount, useContractReads, useEnsAddress, useEnsName } from "wagmi";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import FirstChart from "~~/components/FirstChart";
+//import FirstChart from "~~/components/FirstChart";
 import { MetaHeader } from "~~/components/MetaHeader";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
@@ -80,6 +80,16 @@ function UserToEnsName(props) {
 function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [newUserAddy, setNewUserAddy] = useState("");
+
+  function lookupENSName() {
+    // we can't call hooks here, so we need to do a regular async call to resolve the ENS name into a wallet address
+    //https://docs.ens.domains/dapp-developer-guide/resolving-names
+    // const { data, isError, isLoading } = useEnsAddress({
+    //   name: newUserAddy,
+    // });
+    // console.log(data, "ENS LOOKUP data");
+    // then, send the address to writeNewUserAsync
+  }
 
   const { writeAsync: writeNewUserAsync } = useScaffoldContractWrite({
     contractName: "OrganizationSheet",
@@ -161,6 +171,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   ]);
   const [inputValues, setInputValues] = useState([]);
   const [lastUserToSave, setLastUserToSave] = useState("");
+
   const handleVoteInputChange = (event, index, userAddy) => {
     setLastUserToSave(userAddy);
     const { name, value } = event.target;
@@ -190,7 +201,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
       <div className="flex flex-cols justify-center items-center">
         <img src={orgInfo[1]} width={50} height={75} />
         <div className="flex-1 ml-4">
-          <h1 className="text-3xl font-bold text-primary-content">{orgInfo[0]}</h1>
+          <h1 className="text-3xl font-bold primary-content">{orgInfo[0]}</h1>
         </div>
       </div>
 
@@ -200,7 +211,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
             <ChevronLeftIcon width={20} height={20} />
           </div>
 
-          <p className="text-primary-content text-2xl">November 2023</p>
+          <p className="text-2xl primary-content">November 2023</p>
           <div className="pl-3 cursor-pointer">
             <ChevronRightIcon width={20} height={20} />
           </div>
@@ -209,7 +220,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="flex-1 scroll-x flex flex-row">
           {admins?.map((admin: { result: string; status: string }, i) => {
             return (
-              <div key={admin.result} className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5"}>
+              <div key={admin.result} className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5 py-3"}>
                 <div className="text-sm">
                   <div className="font-mono bg-slate-900 rounded-xl text-white py-1 px-3">
                     <UserToEnsName result={admin.result} />
@@ -239,18 +250,19 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
 
       <div className="mt-10 w-full flex flex-row justify-start items-start">
         <div className="w-[400px]">
-          {users?.map((user: { result: string; status: string }) => {
+          {users?.map((user, i) => {
             return (
-              <div className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm font-mono">
+              <div
+                key={i}
+                className="flex flex-col justify-center h-[50px] border-b-2 border-b-white/20 text-sm font-mono"
+              >
                 <UserToEnsName result={user.result} />
               </div>
             );
           })}
 
           <div className="bg-gradient-to-b from-white/10 to-white/0 p-3 rounded-b-lg">
-            <div className="text-sm font-semibold text-primary-content opacity-70">
-              Add New User (Wallet address or ENS)
-            </div>
+            <div className="text-sm font-semibold primary-content opacity-70">Add New User (Wallet address or ENS)</div>
             <div className="mt-3 w-full flex flex-row justify-start  items-start">
               <div className="flex-1">
                 <input
@@ -261,7 +273,7 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
               </div>
               <div className="w-20 flex justify-end ">
                 <button
-                  onClick={() => writeNewUserAsync()}
+                  onClick={() => lookupENSName()}
                   className="bg-accent hover:bg-accent-focus text-white font-bold py-1 px-3 rounded-full"
                 >
                   Add
@@ -271,19 +283,19 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
           </div>
         </div>
         <div className="flex-1 scroll-x flex flex-col ">
-          {users?.map((user: { result: string; status: string }) => {
+          {users?.map((user, i) => {
             return (
-              <div className="flex flex-row h-[50px] items-center border-b-white/20  border-b-2">
+              <div key={i} className="flex flex-row h-[50px]items-center border-b-white/20 border-b-2">
                 {mockCriteria.map((c, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       <input
                         type="number"
                         max={c.max}
                         name="value"
                         className="w-20 h-8 rounded-md text-center bg-transparent focus:bg-white/10 border-slate-500 border-2 mx-2"
                       />
-                    </>
+                    </div>
                   );
                 })}
                 <button
