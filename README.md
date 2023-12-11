@@ -5,25 +5,26 @@
 ## Smart Contracts
 
 - `OrganizationSheet.sol` - Implementation of tracking for team token allocation for multiple organizations with different users and criteria.
-    
 - `SquirrelToken.sol` - Example of ERC20 compatible contract that could be used in the actual token luanch by the cofounders after all token allocation periods were completed.
 
 ### Adresses of smart contracts deployed on chains
 
 #### Polygon Mumbai Testnet:
+
 -     `OrganizationSheet.sol`    -    0x1732CfDEB84176C78190eaED7592D95726456A77
 -     `SquirrelToken.sol`    0xf492cC2A1e0ADB48B98c6D68118Ab7d79dc93b5d
 
 #### Gnosis Chiado Testnet:
--    `OrganizationSheet.sol`         0x2F51DeA930a71BE9fab183566116b0a5967063ea
--    `SquirrelToken.sol`            0xbb3a8a4ebc9bEf9f394d4bdf2D0ae1EAe794F23a
 
+- `OrganizationSheet.sol` 0x2F51DeA930a71BE9fab183566116b0a5967063ea
+- `SquirrelToken.sol` 0xbb3a8a4ebc9bEf9f394d4bdf2D0ae1EAe794F23a
 
 ### Integrations:
 
 ## PHala
 
 [Phala offchain oracle running](./Capture111.PNG)
+
 ## Requirements
 
 Before you begin, you need to install the following tools:
@@ -80,8 +81,9 @@ Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building wit
 
 To know more about its features, check out our [website](https://scaffoldeth.io).
 
-## Contributing to Scaffold-ETH 2
+---
 
-We welcome contributions to Scaffold-ETH 2!
+# TODO
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+- Allow ENS names to be entered
+- Resolve addresses to ENS names when displayed

@@ -61,7 +61,7 @@ function UserDashboard({ user }: { user: string }) {
         chart.
       </p>
       <br />
-      <FirstChart width="100%" height={400} />
+      {/* <FirstChart width="100%" height={400} /> */}
     </div>
   );
 }
@@ -125,11 +125,9 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
       functionName: "getAdminAtIndex",
       args: [orgId, BigInt(i)],
     };
-    console.log("testinghere", i, contract);
+
     adminCalls.push(contract);
   }
-
-  console.log("admin calls", adminCalls);
 
   const { data: admins } = useContractReads({ contracts: adminCalls });
   console.log(admins, "admins are here");
@@ -152,8 +150,6 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
     criteriaCalls.push(contract);
   }
 
-  console.log("criteria calls", criteriaCalls);
-
   const { data: criteria } = useContractReads({ contracts: criteriaCalls });
   console.log(criteria, "criteria are here");
 
@@ -166,11 +162,10 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
   const [inputValues, setInputValues] = useState([]);
   const [lastUserToSave, setLastUserToSave] = useState("");
   const handleVoteInputChange = (event, index, userAddy) => {
-    console.log(event, index, userAddy, "debugging here");
     setLastUserToSave(userAddy);
     const { name, value } = event.target;
     let list = [...inputValues];
-    console.log(list, "list");
+
     if (!list[index]) {
       list[index] = {};
     }
@@ -214,27 +209,28 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
         <div className="flex-1 scroll-x flex flex-row">
           {admins?.map((admin: { result: string; status: string }, i) => {
             return (
-              <div className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5"}>
-                <p key={admin.result} className="text-sm">
+              <div key={admin.result} className={(i % 2 ? `bg-white/20` : `bg-white/10`) + " px-5"}>
+                <div className="text-sm">
                   <div className="font-mono bg-slate-900 rounded-xl text-white py-1 px-3">
                     <UserToEnsName result={admin.result} />
                   </div>
 
                   <div className="flex flex-row mt-3">
-                    {mockCriteria.map(c => {
+                    {mockCriteria.map((c, i) => {
                       return (
                         <div
                           onChange={e => {
                             c.value = e.target.value;
                           }}
                           className="w-1/4 text-sm text-center font-bold"
+                          key={i}
                         >
                           {c.name}
                         </div>
                       );
                     })}
                   </div>
-                </p>
+                </div>
               </div>
             );
           })}
@@ -252,7 +248,9 @@ function AdminDashboard({ orgId, orgInfo }: { orgId: bigint; orgInfo: any }) {
           })}
 
           <div className="bg-gradient-to-b from-white/10 to-white/0 p-3 rounded-b-lg">
-            <div className="text-sm font-semibold text-primary-content opacity-70">Add New User</div>
+            <div className="text-sm font-semibold text-primary-content opacity-70">
+              Add New User (Wallet address or ENS)
+            </div>
             <div className="mt-3 w-full flex flex-row justify-start  items-start">
               <div className="flex-1">
                 <input
